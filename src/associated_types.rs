@@ -26,6 +26,7 @@ impl<'a, T: 'a> Iter<'a> for List<T> {
     type Item = &'a T;
     type Iter = ListIter<'a, T>;
 
+    // Returns an iterator over the list.
     fn iter(&'a self) -> Self::Iter {
         ListIter { next: self.head.as_ref().map(|node| &**node) }
     }
@@ -38,6 +39,7 @@ struct ListIter<'a, T> {
 impl<'a, T> Iterator for ListIter<'a, T> {
     type Item = &'a T;
 
+    // Returns a reference to the current item and moves the iterator to the next item.
     fn next(&mut self) -> Option<Self::Item> {
         match self.next {
             Some(node) => {
