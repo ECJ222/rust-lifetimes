@@ -1,3 +1,5 @@
+// If you want to run just copy and paste the code into main.rs and run `cargo run` in your terminal.
+
 trait Iter<'a> {
     type Item;
     type Iter: Iterator<Item = Self::Item> + 'a;
