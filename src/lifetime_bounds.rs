@@ -4,22 +4,22 @@
 use std::fmt::Display;
 
 #[derive(Debug)]
-struct Movie {
-    title: String,
-    rating: f64,
+struct Movie<'a, T> {
+    title: &'a str,
+    rating: T,
 }
 
-impl Movie {
-    fn new<T: Display + PartialOrd>(title: String, rating: T) -> Self {
+impl<'a, T: 'a + Display + PartialOrd> Movie<'a, T> {
+    fn new(title: &'a str, rating: T) -> Self {
         Movie {
             title,
-            rating: rating.to_string().parse().unwrap(),
+            rating,
         }
     }
 }
 
 fn main() {
-    let movie = Movie::new("The Shawshank Redemption".to_string(), 9.3);
+    let movie = Movie::new("The Shawshank Redemption", 9.3);
     println!("{:#?}", movie);
 }
 
